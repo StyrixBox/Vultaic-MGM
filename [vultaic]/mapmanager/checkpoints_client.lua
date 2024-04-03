@@ -92,7 +92,11 @@ function makeCheckpointCurrent(id)
 		if checkpoint then
 			-- Avoid duplicates
 			if not isElement(checkpoint.colshape) then
-				checkpoint.colshape = createColCircle(checkpoint.position[1], checkpoint.position[2], checkpoint.markerSize + 4)
+				if checkpoint.markerType == "checkpoint" then
+					checkpoint.colshape = createColCircle(checkpoint.position[1], checkpoint.position[2], checkpoint.markerSize + 4)
+				else
+					checkpoint.colshape = createColSphere(checkpoint.position[1], checkpoint.position[2], checkpoint.position[3], checkpoint.markerSize + 4)
+				end
 				-- Add event so it can be reached
 				if isElement(checkpoint.colshape) then
 					setElementParent(checkpoint.colshape, checkpointContainer)
